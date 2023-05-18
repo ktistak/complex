@@ -13,6 +13,14 @@ after_success:
   - docker build -t georgiosktistakis/complex-nginx ./nginx
   - docker build -t georgiosktistakis/complex-server ./server
   - docker build -t georgiosktistakis/complex-worker ./worker
+  #login to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  #take those images and push them to docker hub
+  - docker push georgiosktistakis/complex-client
+  - docker push georgiosktistakis/complex-nginx
+  - docker push georgiosktistakis/complex-server
+  - docker push georgiosktistakis/complex-worker
+  
 # deploy:
 #   provider: elasticbeanstalk
 #   region: "eu-north-1"
