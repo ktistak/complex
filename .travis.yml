@@ -1,4 +1,6 @@
 sudo: required
+language: generic
+
 services: 
   - docker
 
@@ -6,7 +8,7 @@ before_install:
   - docker build -t georgiosktistakis/complex-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true georgiosktistakis/complex-test npm test
+  - docker run -e CI=true georgiosktistakis/complex-test npm run test
 
 after_success:
   - docker build -t georgiosktistakis/complex-client ./client
@@ -20,7 +22,7 @@ after_success:
   - docker push georgiosktistakis/complex-nginx
   - docker push georgiosktistakis/complex-server
   - docker push georgiosktistakis/complex-worker
-  
+
 # deploy:
 #   provider: elasticbeanstalk
 #   region: "eu-north-1"
