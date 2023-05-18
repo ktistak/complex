@@ -1,0 +1,26 @@
+sudo: required
+services: 
+  - docker
+
+before_install:
+  - docker build -t georgiosktistakis/complex-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true georgiosktistakis/complex-test npm test
+
+after_success:
+  - docker build -t georgiosktistakis/complex-client ./client
+  - docker build -t georgiosktistakis/complex-nginx ./nginx
+  - docker build -t georgiosktistakis/complex-server ./server
+  - docker build -t georgiosktistakis/complex-worker ./worker
+# deploy:
+#   provider: elasticbeanstalk
+#   region: "eu-north-1"
+#   app: "ktistak-docker-app"
+#   env: "Ktistak-docker-app-env"
+#   bucket_name: "elasticbeanstalk-eu-north-1-546455860366"
+#   bucket_path: "ktistak-docker-app" 
+#   on:
+#     branch: main
+#   access_key_id: $AWS_ACCESS_KEY
+#   secrete_access_key: $AWS_SECRET_KEY
