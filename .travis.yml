@@ -23,14 +23,14 @@ after_success:
   - docker push georgiosktistakis/complex-server
   - docker push georgiosktistakis/complex-worker
 
-# deploy:
-#   provider: elasticbeanstalk
-#   region: "eu-north-1"
-#   app: "ktistak-docker-app"
-#   env: "Ktistak-docker-app-env"
-#   bucket_name: "elasticbeanstalk-eu-north-1-546455860366"
-#   bucket_path: "ktistak-docker-app" 
-#   on:
-#     branch: main
-#   access_key_id: $AWS_ACCESS_KEY
-#   secrete_access_key: $AWS_SECRET_KEY
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-north-1"
+  app: "ktistak-complex-app"
+  env: "Ktistak-complex-app-env"
+  bucket_name: "elasticbeanstalk-eu-north-1-546455860366"
+  bucket_path: "ktistak-complex-app" 
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secrete_access_key: $AWS_SECRET_KEY
